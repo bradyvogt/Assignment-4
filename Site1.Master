@@ -15,22 +15,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md">
-        <a class="navbar-brand" href="#">ACELINQ</a>
-        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" runat="server" href="~/">Travis & Brady</a>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="main-navigation">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <asp:HyperLink class="nav-link" ID="HyperLink1" runat="server" NavigateUrl="~/AutoSelection.aspx">Home</asp:HyperLink>
-                </li>
-                <li class="nav-item">
-                    <asp:HyperLink class="nav-link" ID="HyperLink2" runat="server" NavigateUrl="~/Administrator.aspx">Administrator</asp:HyperLink>
-                </li>
+        <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item"><a class="nav-link" runat="server" href="~/Instructor.aspx">Instructor</a></li>
+                <li class="nav-item"><a class="nav-link" runat="server" href="~/Member.aspx">Member</a></li>
             </ul>
         </div>
-    </nav>
+    </div>
+</nav>
     <header class="page-header header container-fluid">
         <div class="overlay">
             <div class="description">
@@ -49,16 +48,15 @@
                 <div class="col-lg-8 col-md-8 col-sm-12">
                     <h6 class="text-uppercase font-weight-bold">Additional Information</h6>
                     <p>Travis Kunkel
+                    <br /> Brady Vogt
                     <br /> CSCI 213
                     </p>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <h6 class="text-uppercase font-weight-bold">Contact</h6>
                     <p>
-                        1340 Administration Ave, Fargo, ND 58102
                         <br />Travis.Kunkel@ndsu.edu
-                        <br />+ 1 (701) 867-5309
-                    </p>
+                        <br />Brady.Vogt@ndsu.edu
                 </div>
             </div>
         </div>
