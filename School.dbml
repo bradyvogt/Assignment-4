@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="KarateSchool" Class="SchoolDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.Instructor" Member="Instructors">
+    <Type Name="Instructor">
+      <Column Name="InstructorID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="InstructorFirstName" Type="System.String" DbType="NVarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="InstructorLastName" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="InstructorPhoneNumber" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="NetUser_Instructor" Member="NetUser" ThisKey="InstructorID" OtherKey="UserID" Type="NetUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Section" Member="Sections">
+    <Type Name="Section">
+      <Column Name="SectionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SectionName" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="SectionStartDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Member_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Instructor_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SectionFee" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="Member_Section" Member="Member" ThisKey="Member_ID" OtherKey="Member_UserID" Type="Member" IsForeignKey="true" />
+      <Association Name="NetUser_Section" Member="NetUser" ThisKey="Instructor_ID" OtherKey="UserID" Type="NetUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Member" Member="Members">
+    <Type Name="Member">
+      <Column Name="Member_UserID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MemberFirstName" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="MemberLastName" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="MemberDateJoined" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="MemberPhoneNumber" Type="System.String" DbType="NVarChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="MemberEmail" Type="System.String" DbType="NVarChar(45) NOT NULL" CanBeNull="false" />
+      <Association Name="Member_Section" Member="Sections" ThisKey="Member_UserID" OtherKey="Member_ID" Type="Section" />
+      <Association Name="NetUser_Member" Member="NetUser" ThisKey="Member_UserID" OtherKey="UserID" Type="NetUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NetUser" Member="NetUsers">
+    <Type Name="NetUser">
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="UserPassword" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="UserType" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="NetUser_Instructor" Member="Instructor" ThisKey="UserID" OtherKey="InstructorID" Type="Instructor" Cardinality="One" />
+      <Association Name="NetUser_Section" Member="Sections" ThisKey="UserID" OtherKey="Instructor_ID" Type="Section" />
+      <Association Name="NetUser_Member" Member="Member" ThisKey="UserID" OtherKey="Member_UserID" Type="Member" Cardinality="One" />
+    </Type>
+  </Table>
+</Database>
