@@ -73,7 +73,10 @@
       <DependentUpon>KarateSchool.mdf</DependentUpon>
     </Content>
     <Content Include="Global.asax" />
+    <Content Include="image.jpg" />
     <Content Include="Instructor.aspx" />
+    <Content Include="main.css" />
+    <Content Include="main.js" />
     <Content Include="Member.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
