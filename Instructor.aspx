@@ -3,7 +3,7 @@
     <p>
         Hi
         <asp:Label ID="lblFirstName" runat="server" Text="First"></asp:Label>
-&nbsp;<asp:Label ID="lblLastName" runat="server" Text="Last"></asp:Label>
+        <asp:Label ID="lblLastName" runat="server" Text="Last"></asp:Label>
         ,</p>
     <p>
         <asp:GridView ID="instructorGridView" runat="server">

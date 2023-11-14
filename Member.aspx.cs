@@ -26,8 +26,15 @@ namespace KarateSchool
 
             memberGridView.DataSource = results;
             memberGridView.DataBind();
-        }
 
+            Member member = (from m in dbcon.Members
+                             where m.Member_UserID == loggedInMemberId
+                             select m).First();
+
+            lblFirstName.Text = member.MemberFirstName;
+            lblLastName.Text = member.MemberLastName;
+        }
+        
 
     }
 }
