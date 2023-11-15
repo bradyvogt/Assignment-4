@@ -74,28 +74,28 @@
     </Content>
     <Content Include="Global.asax" />
     <Content Include="image.jpg" />
-    <Content Include="Instructor.aspx" />
+    <Content Include="InstructorInfo\Instructor.aspx" />
     <Content Include="main.css" />
     <Content Include="main.js" />
-    <Content Include="Member.aspx" />
+    <Content Include="MemeberInfo\Member.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Instructor.aspx.cs">
+    <Compile Include="InstructorInfo\Instructor.aspx.cs">
       <DependentUpon>Instructor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Instructor.aspx.designer.cs">
+    <Compile Include="InstructorInfo\Instructor.aspx.designer.cs">
       <DependentUpon>Instructor.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Member.aspx.cs">
+    <Compile Include="MemeberInfo\Member.aspx.cs">
       <DependentUpon>Member.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Member.aspx.designer.cs">
+    <Compile Include="MemeberInfo\Member.aspx.designer.cs">
       <DependentUpon>Member.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
