@@ -33,7 +33,7 @@
     <header class="page-header header container-fluid">
         <div class="overlay">
             <div class="description">
-                <h1>Ace Auto Rentals</h1>
+                <h1>Karate School</h1>
             </div>
         </div>
     </header>
@@ -57,6 +57,7 @@
                     <p>
                         <br />Travis.Kunkel@ndsu.edu
                         <br />Brady.Vogt@ndsu.edu
+                    </p>
                 </div>
             </div>
         </div>

@@ -104,6 +104,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>School.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Member.Master.cs">
+      <DependentUpon>Member.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member.Master.designer.cs">
+      <DependentUpon>Member.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Instructor.Master.cs">
+      <DependentUpon>Instructor.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Instructor.Master.designer.cs">
+      <DependentUpon>Instructor.Master</DependentUpon>
+    </Compile>
     <Compile Include="Site1.Master.cs">
       <DependentUpon>Site1.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -123,6 +137,8 @@
     <None Include="School.dbml.layout">
       <DependentUpon>School.dbml</DependentUpon>
     </None>
+    <Content Include="Member.Master" />
+    <Content Include="Instructor.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
