@@ -75,6 +75,7 @@
     <Content Include="Global.asax" />
     <Content Include="image.jpg" />
     <Content Include="InstructorInfo\Instructor.aspx" />
+    <Content Include="Logon.aspx" />
     <Content Include="main.css" />
     <Content Include="main.js" />
     <Content Include="MemeberInfo\Member.aspx" />
@@ -90,6 +91,13 @@
     </Compile>
     <Compile Include="InstructorInfo\Instructor.aspx.designer.cs">
       <DependentUpon>Instructor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logon.aspx.cs">
+      <DependentUpon>Logon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logon.aspx.designer.cs">
+      <DependentUpon>Logon.aspx</DependentUpon>
     </Compile>
     <Compile Include="MemeberInfo\Member.aspx.cs">
       <DependentUpon>Member.aspx</DependentUpon>
@@ -113,6 +121,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="InstructorInfo\Web.config" />
+    <Content Include="MemeberInfo\Web.config" />
     <None Include="packages.config" />
     <Content Include="Site1.Master" />
     <Content Include="School.dbml">
