@@ -78,7 +78,7 @@
     <Content Include="Logon.aspx" />
     <Content Include="main.css" />
     <Content Include="main.js" />
-    <Content Include="MemeberInfo\Member.aspx" />
+    <Content Include="MemberInfo\Member.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -99,11 +99,11 @@
     <Compile Include="Logon.aspx.designer.cs">
       <DependentUpon>Logon.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MemeberInfo\Member.aspx.cs">
+    <Compile Include="MemberInfo\Member.aspx.cs">
       <DependentUpon>Member.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MemeberInfo\Member.aspx.designer.cs">
+    <Compile Include="MemberInfo\Member.aspx.designer.cs">
       <DependentUpon>Member.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -122,7 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="InstructorInfo\Web.config" />
-    <Content Include="MemeberInfo\Web.config" />
+    <Content Include="MemberInfo\Web.config" />
     <None Include="packages.config" />
     <Content Include="Site1.Master" />
     <Content Include="School.dbml">
