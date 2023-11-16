@@ -24,8 +24,19 @@
         </button>
         <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
             <ul class="navbar-nav flex-grow-1">
-                <li class="nav-item"><a class="nav-link" runat="server" href="~/MemberInfo/Member.aspx">Member</a></li>
-                <li class="nav-item"><a class="nav-link" runat="server" href="~/InstructorInfo/Instructor.aspx">Instructor</a></li>
+                <% if (Session["userType"] != null && Session["userType"].ToString().Trim() == "Administrator")
+                    { %>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/InstructorInfo/Instructor.aspx">Instructor</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/MemberInfo/Member.aspx">Member</a></li>
+                <% }
+                    else if (Session["userType"] != null && Session["userType"].ToString().Trim() == "Member")
+                    { %>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/MemberInfo/Member.aspx">Member</a></li>
+                <% }
+                    else if (Session["userType"] != null && Session["userType"].ToString().Trim() == "Instructor")
+                   {%>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/InstructorInfo/Instructor.aspx">Instructor</a></li>
+                <%} %>
             </ul>
         </div>
     </div>
