@@ -8,5 +8,6 @@
     <p>
         <asp:GridView ID="instructorGridView" runat="server">
         </asp:GridView>
+        <asp:LoginStatus ID="LoginStatus1" runat="server" />
     </p>
 </asp:Content>

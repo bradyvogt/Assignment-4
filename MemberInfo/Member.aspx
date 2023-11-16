@@ -8,6 +8,6 @@
     <p>
         <asp:GridView ID="memberGridView" runat="server">
         </asp:GridView>
+        <asp:LoginStatus ID="LoginStatus1" runat="server" />
     </p>
-    
 </asp:Content>
