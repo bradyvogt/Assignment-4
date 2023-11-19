@@ -1,5 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Administrartor.aspx.cs" Inherits="KarateSchool.AdminInfo.Administrartor" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Administrator.aspx.cs" Inherits="KarateSchool.AdminInfo.Administrartor" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    Hello,
+    <asp:LoginName ID="LoginName1" runat="server" />
+    <asp:LoginStatus ID="LoginStatus1" runat="server" />
+&nbsp;<br />
     <table style="width:100%">
     <tr>
         <td style="background-color: #FFFFCC">

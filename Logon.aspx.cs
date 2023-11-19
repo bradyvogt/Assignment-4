@@ -71,6 +71,13 @@ namespace KarateSchool
 
                 Response.Redirect("~/InstructorInfo/Instructor.aspx");
             }
+            else if (myUser != null && HttpContext.Current.Session["userType"].ToString().Trim() == "Administrator")
+            {
+
+                FormsAuthentication.RedirectFromLoginPage(HttpContext.Current.Session["username"].ToString(), true);
+
+                Response.Redirect("~/AdminInfo/Administrator.aspx");
+            }
             else
             {
                 Response.Redirect("Logon.aspx", true);

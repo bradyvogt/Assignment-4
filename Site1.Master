@@ -28,6 +28,7 @@
                     { %>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/InstructorInfo/Instructor.aspx">Instructor</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/MemberInfo/Member.aspx">Member</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/AdminInfo/Administrator.aspx">Administrator</a></li>
                 <% }
                     else if (Session["userType"] != null && Session["userType"].ToString().Trim() == "Member")
                     { %>
@@ -44,7 +45,7 @@
     <header class="page-header header container-fluid">
         <div class="overlay">
             <div class="description">
-                <h1>Ace Auto Rentals</h1>
+                <h1>Karate School</h1>
             </div>
         </div>
     </header>
@@ -67,7 +68,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <h6 class="text-uppercase font-weight-bold">Contact</h6>
                     <p>
-                        <br />Travis.Kunkel@ndsu.edu
+                        Travis.Kunkel@ndsu.edu
                         <br />Brady.Vogt@ndsu.edu
                     </p>
                 </div>

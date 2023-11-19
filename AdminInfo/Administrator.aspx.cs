@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -19,6 +20,22 @@ namespace KarateSchool.AdminInfo
         string conn = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\travis kunkel\\source\\repos\\bradyvogt\\Assignment-4\\App_Data\\KarateSchool.mdf\";Integrated Security=True;Connect Timeout=30";
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session.Count != 0)
+            {
+                if (HttpContext.Current.Session["userType"].ToString().Trim() != "Administrator")
+                {
+                    Session.Clear();
+                    Session.RemoveAll();
+                    Session.Abandon();
+                    Session.Abandon();
+                    FormsAuthentication.SignOut();
+                    Response.Redirect("Logon.aspx", true);
+                }
+            }
+
+            // Create connection to database
+            dbcon = new SchoolDataContext(conn);
+
             if (!IsPostBack)
             {
                 // Show all members and instructors
