@@ -18,12 +18,16 @@ namespace KarateSchool.AdminInfo
 
         // TK Connection String
         string conn = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\travis kunkel\\source\\repos\\bradyvogt\\Assignment-4\\App_Data\\KarateSchool.mdf\";Integrated Security=True;Connect Timeout=30";
+        
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Check that user is logged in
             if (Session.Count != 0)
             {
+                // Check that user is an administrator
                 if (HttpContext.Current.Session["userType"].ToString().Trim() != "Administrator")
                 {
+                    // If not, redirect to logon page
                     Session.Clear();
                     Session.RemoveAll();
                     Session.Abandon();
@@ -36,6 +40,7 @@ namespace KarateSchool.AdminInfo
             // Create connection to database
             dbcon = new SchoolDataContext(conn);
 
+            // Check if the page is loaded for the first time
             if (!IsPostBack)
             {
                 // Show all members and instructors
@@ -52,7 +57,6 @@ namespace KarateSchool.AdminInfo
                                   x.Member_UserID,
                                   Fullname = x.MemberFirstName + " " + x.MemberLastName
                               };
-
                 var instructors = from x in dbcon.Instructors
                                   select new
                                   {
@@ -74,6 +78,11 @@ namespace KarateSchool.AdminInfo
             }
         }
 
+        /// <summary>
+        /// Updates the labels with the selected member's info for confirmation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void dgvMembers_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Get info from member table for the selected member
@@ -96,82 +105,11 @@ namespace KarateSchool.AdminInfo
             lblDeleteMemberEmail.Text = results.MemberEmail;
         }
 
-        private void ShowAllMembers()
-        {
-            // Create connection to database
-            dbcon = new SchoolDataContext(conn);
-
-            // Get member names, phone numbers and dates joined
-            var memberResults = from x in dbcon.Members
-                                select new
-                                {
-                                    x.Member_UserID,
-                                    x.MemberFirstName,
-                                    x.MemberLastName,
-                                    x.MemberPhoneNumber,
-                                    x.MemberDateJoined
-                                };
-
-            // Bind and display results
-            dgvMembers.DataSource = memberResults;
-            dgvMembers.DataBind();
-        }
-
-        private void ShowAllInstructors()
-        {
-            // Create connection to database
-            dbcon = new SchoolDataContext(conn);
-
-            // Get instructor names
-            var instructorResults = from x in dbcon.Instructors
-                                    select new
-                                    {
-                                        x.InstructorID,
-                                        x.InstructorFirstName,
-                                        x.InstructorLastName
-                                    };
-
-            // Bind and display results
-            dgvInstructors.DataSource = instructorResults;
-            dgvInstructors.DataBind();
-        }
-
-        protected void dgvInstructors_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Create connection to database
-            dbcon = new SchoolDataContext(conn);
-            int temp = Convert.ToInt32(dgvInstructors.SelectedDataKey[0].ToString());
-
-            // Get info from instructor table for the selected instructor
-            var results = (from instructor in dbcon.Instructors
-                           where instructor.InstructorID == Convert.ToInt32(dgvInstructors.SelectedDataKey[0].ToString())
-                           select new
-                           {
-                               instructor.InstructorFirstName,
-                               instructor.InstructorLastName,
-                               instructor.InstructorPhoneNumber,
-                           }).First();
-
-            // Display results
-            lblDeleteInstructorFName.Text = results.InstructorFirstName;
-            lblDeleteInstructorLName.Text = results.InstructorLastName;
-            lblDeleteInstructorPhoneNumber.Text = results.InstructorPhoneNumber;
-        }
-
-        // Hide InstructorID column. Id is needed for deletion
-        protected void dgvInstructors_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            // InstructorID is column 1
-            e.Row.Cells[1].Visible = false;
-        }
-
-        // Hide UserID column. Id is needed for deletion
-        protected void dgvMembers_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            // UserID is column 1
-            e.Row.Cells[1].Visible = false;
-        }
-
+        /// <summary>
+        /// Creates a new member and corresponding user, then adds them to the database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnAddMember_Click(object sender, EventArgs e)
         {
             // Create connection to database
@@ -229,6 +167,11 @@ namespace KarateSchool.AdminInfo
             txtAddInstructorPassword.Text = string.Empty;
         }
 
+        /// <summary>
+        /// Deletes the selected member and corresponding user from the database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnDeleteMember_Click(object sender, EventArgs e)
         {
             // Check that data is selected
@@ -266,6 +209,38 @@ namespace KarateSchool.AdminInfo
             lblDeleteMemberEmail.Text = string.Empty;
         }
 
+        /// <summary>
+        /// Updates the labels with the selected instructor's info for confirmation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void dgvInstructors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Create connection to database
+            dbcon = new SchoolDataContext(conn);
+            int temp = Convert.ToInt32(dgvInstructors.SelectedDataKey[0].ToString());
+
+            // Get info from instructor table for the selected instructor
+            var results = (from instructor in dbcon.Instructors
+                           where instructor.InstructorID == Convert.ToInt32(dgvInstructors.SelectedDataKey[0].ToString())
+                           select new
+                           {
+                               instructor.InstructorFirstName,
+                               instructor.InstructorLastName,
+                               instructor.InstructorPhoneNumber,
+                           }).First();
+
+            // Display results
+            lblDeleteInstructorFName.Text = results.InstructorFirstName;
+            lblDeleteInstructorLName.Text = results.InstructorLastName;
+            lblDeleteInstructorPhoneNumber.Text = results.InstructorPhoneNumber;
+        }
+
+        /// <summary>
+        /// Creates a new instructor and corresponding user, then adds adds them to the database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnAddInstructor_Click(object sender, EventArgs e)
         {
             // Create connection to database
@@ -319,6 +294,11 @@ namespace KarateSchool.AdminInfo
             txtAddInstructorPassword.Text = string.Empty;
         }
 
+        /// <summary>
+        /// Deletes the selected instructor and corresponding user from the database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnDeleteInstructor_Click(object sender, EventArgs e)
         {
             // Check that data is selected
@@ -354,6 +334,11 @@ namespace KarateSchool.AdminInfo
             lblDeleteInstructorPhoneNumber.Text = string.Empty;
         }
 
+        /// <summary>
+        /// Creates a new section and adds it to the database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnAssign_Click(object sender, EventArgs e)
         {
 
@@ -377,6 +362,74 @@ namespace KarateSchool.AdminInfo
             // Clear textboxes
             txtSectionDate.Text = string.Empty;
             txtFee.Text = string.Empty;
+        }
+
+        /// <summary>
+        /// Hides InstructorID column. Id is needed for deletion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param> The row that is being bound
+        protected void dgvInstructors_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            // InstructorID is column 1
+            e.Row.Cells[1].Visible = false;
+        }
+
+        /// <summary>
+        /// Hides UserID column. ID is needed for deletion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param> The row that is being bound
+        protected void dgvMembers_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            // UserID is column 1
+            e.Row.Cells[1].Visible = false;
+        }
+
+        /// <summary>
+        /// Gets every record from the Member table and displays them in dgvMembers
+        /// </summary>
+        private void ShowAllMembers()
+        {
+            // Create connection to database
+            dbcon = new SchoolDataContext(conn);
+
+            // Get member names, phone numbers and dates joined
+            var memberResults = from x in dbcon.Members
+                                select new
+                                {
+                                    x.Member_UserID,
+                                    x.MemberFirstName,
+                                    x.MemberLastName,
+                                    x.MemberPhoneNumber,
+                                    x.MemberDateJoined
+                                };
+
+            // Bind and display results
+            dgvMembers.DataSource = memberResults;
+            dgvMembers.DataBind();
+        }
+
+        /// <summary>
+        /// Gets every record from the Instructor table and displays them in dgvInstructors
+        /// </summary>
+        private void ShowAllInstructors()
+        {
+            // Create connection to database
+            dbcon = new SchoolDataContext(conn);
+
+            // Get instructor names
+            var instructorResults = from x in dbcon.Instructors
+                                    select new
+                                    {
+                                        x.InstructorID,
+                                        x.InstructorFirstName,
+                                        x.InstructorLastName
+                                    };
+
+            // Bind and display results
+            dgvInstructors.DataSource = instructorResults;
+            dgvInstructors.DataBind();
         }
     }
 }
