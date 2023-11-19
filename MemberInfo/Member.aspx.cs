@@ -34,6 +34,7 @@ namespace KarateSchool
 
             }
 
+            // Initialize connection string
             dbcon = new SchoolDataContext(conn);
 
             int loggedInMemberId = Convert.ToInt32(HttpContext.Current.Session["userID"]);
@@ -46,14 +47,14 @@ namespace KarateSchool
             memberGridView.DataSource = results;
             memberGridView.DataBind();
 
-            Member member = (from m in dbcon.Members
+            var member = (from m in dbcon.Members
                              where m.Member_UserID == loggedInMemberId
-                             select m).First();
+                             select new
+                             {
+                                 FullName = m.MemberFirstName + " " + m.MemberLastName
+                             }).First();
 
-            lblFirstName.Text = member.MemberFirstName;
-            lblLastName.Text = member.MemberLastName;
+            lblFullName.Text = "(" + member.FullName + ")";
         }
-        
-
     }
 }

@@ -46,12 +46,14 @@ namespace KarateSchool
             instructorGridView.DataSource = results;
             instructorGridView.DataBind();
 
-            Instructor instructor = (from i in dbcon.Instructors
-                                    where i.InstructorID == loggedInInstructorId
-                                    select i).First();
+            var instructor = (from i in dbcon.Instructors
+                               where i.InstructorID == loggedInInstructorId
+                               select new
+                               {
+                                   fullName = i.InstructorFirstName + " " + i.InstructorLastName
+                               }).First();
 
-            lblFirstName.Text = instructor.InstructorFirstName;
-            lblLastName.Text = instructor.InstructorLastName;
+            lblFullName.Text = "(" + instructor.fullName + ")";
         }
     }
 }

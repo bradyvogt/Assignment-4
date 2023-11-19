@@ -47,9 +47,6 @@ namespace KarateSchool.AdminInfo
                 ShowAllMembers();
                 ShowAllInstructors();
 
-                // Create connection to database
-                dbcon = new SchoolDataContext(conn);
-
                 // Get all members and instructors. Concat first and last names for dropdowns
                 var members = from x in dbcon.Members
                               select new
@@ -112,9 +109,6 @@ namespace KarateSchool.AdminInfo
         /// <param name="e"></param>
         protected void btnAddMember_Click(object sender, EventArgs e)
         {
-            // Create connection to database
-            dbcon = new SchoolDataContext(conn);
-
             // Create new NetUser object
             NetUser newUser = new NetUser();
 
@@ -180,9 +174,6 @@ namespace KarateSchool.AdminInfo
                 return;
             }
 
-            // Create connection to database
-            dbcon = new SchoolDataContext(conn);
-
             // Get Member and User objects
             Member deleteMember = (from member in dbcon.Members
                                    where member.Member_UserID == Convert.ToInt32(dgvMembers.SelectedDataKey[0].ToString())
@@ -216,10 +207,6 @@ namespace KarateSchool.AdminInfo
         /// <param name="e"></param>
         protected void dgvInstructors_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Create connection to database
-            dbcon = new SchoolDataContext(conn);
-            int temp = Convert.ToInt32(dgvInstructors.SelectedDataKey[0].ToString());
-
             // Get info from instructor table for the selected instructor
             var results = (from instructor in dbcon.Instructors
                            where instructor.InstructorID == Convert.ToInt32(dgvInstructors.SelectedDataKey[0].ToString())
@@ -243,9 +230,6 @@ namespace KarateSchool.AdminInfo
         /// <param name="e"></param>
         protected void btnAddInstructor_Click(object sender, EventArgs e)
         {
-            // Create connection to database
-            dbcon = new SchoolDataContext(conn);
-
             // Create new NetUser object
             NetUser newUser = new NetUser();
 
@@ -307,9 +291,6 @@ namespace KarateSchool.AdminInfo
                 return;
             }
 
-            // Create connection to database
-            dbcon = new SchoolDataContext(conn);
-
             // Get Instructor and User objects
             Instructor deleteInstructor = (from instructor in dbcon.Instructors
                                            where instructor.InstructorID == Convert.ToInt32(dgvInstructors.SelectedDataKey[0].ToString())
@@ -341,10 +322,6 @@ namespace KarateSchool.AdminInfo
         /// <param name="e"></param>
         protected void btnAssign_Click(object sender, EventArgs e)
         {
-
-            // Create connection to database
-            dbcon = new SchoolDataContext(conn);
-
             // Create new section object
             Section newSection = new Section();
 
@@ -391,9 +368,6 @@ namespace KarateSchool.AdminInfo
         /// </summary>
         private void ShowAllMembers()
         {
-            // Create connection to database
-            dbcon = new SchoolDataContext(conn);
-
             // Get member names, phone numbers and dates joined
             var memberResults = from x in dbcon.Members
                                 select new
@@ -415,9 +389,6 @@ namespace KarateSchool.AdminInfo
         /// </summary>
         private void ShowAllInstructors()
         {
-            // Create connection to database
-            dbcon = new SchoolDataContext(conn);
-
             // Get instructor names
             var instructorResults = from x in dbcon.Instructors
                                     select new
