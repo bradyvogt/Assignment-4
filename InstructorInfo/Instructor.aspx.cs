@@ -34,26 +34,69 @@ namespace KarateSchool
                 }
             }
 
+            // Initialize connection string
             dbcon = new SchoolDataContext(conn);
 
-            int loggedInInstructorId = Convert.ToInt32(HttpContext.Current.Session["userID"]);
+            // Check if page is loading for the first time
+            if (!IsPostBack)
+            {
+                // If instructor, relevant info
+                if (HttpContext.Current.Session["userType"].ToString().Trim() == "Instructor")
+                {
+                    ShowData(Convert.ToInt32(HttpContext.Current.Session["userID"]));
 
+                    var instructor = (from i in dbcon.Instructors
+                                      where i.InstructorID == Convert.ToInt32(HttpContext.Current.Session["userID"])
+                                      select new
+                                      {
+                                          fullName = i.InstructorFirstName + " " + i.InstructorLastName
+                                      }).First();
+
+                    lblFullName.Text = "(" + instructor.fullName + ")";
+                }
+                // Must be admin
+                else
+                {
+                    // Get all instructors. Concat first and last names for dropdowns
+                    var instructors = from x in dbcon.Instructors
+                                        select new
+                                        {
+                                            x.InstructorID,
+                                            FullName = x.InstructorFirstName + " " + x.InstructorLastName
+                                        };
+
+                    // Prime dropdown
+                    ddlInstructors.DataTextField = "FullName";
+                    ddlInstructors.DataValueField = "InstructorID";
+
+                    // Add data to dropdown
+                    ddlInstructors.DataSource = instructors;
+                    ddlInstructors.DataBind();
+
+                    // Show label and dropdown
+                    Label1.Visible = true;
+                    ddlInstructors.Visible = true;
+
+                    // Show data for first instructor
+                    ShowData(Convert.ToInt32(ddlInstructors.SelectedValue));
+                }
+            }
+        }
+
+        protected void ddlInstructors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Update gridview for selected instructor
+            ShowData(Convert.ToInt32(ddlInstructors.SelectedValue));
+        }
+        private void ShowData(int ID)
+        {
             var results = from sect in dbcon.Sections
                           join memb in dbcon.Members on sect.Member_ID equals memb.Member_UserID
-                          where sect.Instructor_ID == loggedInInstructorId
-                          select new { sect.SectionName, memb.MemberFirstName, memb.MemberLastName};
+                          where sect.Instructor_ID == ID
+                          select new { sect.SectionName, memb.MemberFirstName, memb.MemberLastName };
 
             instructorGridView.DataSource = results;
             instructorGridView.DataBind();
-
-            var instructor = (from i in dbcon.Instructors
-                               where i.InstructorID == loggedInInstructorId
-                               select new
-                               {
-                                   fullName = i.InstructorFirstName + " " + i.InstructorLastName
-                               }).First();
-
-            lblFullName.Text = "(" + instructor.fullName + ")";
         }
     }
 }

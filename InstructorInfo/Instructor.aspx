@@ -8,6 +8,11 @@
         <asp:LoginStatus ID="LoginStatus1" runat="server" />
     </p>
     <p>
+        <asp:Label ID="Label1" runat="server" Text="Select a Instructor to preview: "></asp:Label>
+        <asp:DropDownList ID="ddlInstructors" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlInstructors_SelectedIndexChanged" Visible="False">
+        </asp:DropDownList>
+    </p>
+    <p>
         <asp:GridView ID="instructorGridView" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <EditRowStyle BackColor="#999999" />

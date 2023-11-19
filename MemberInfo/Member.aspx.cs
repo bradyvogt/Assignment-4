@@ -37,24 +37,71 @@ namespace KarateSchool
             // Initialize connection string
             dbcon = new SchoolDataContext(conn);
 
-            int loggedInMemberId = Convert.ToInt32(HttpContext.Current.Session["userID"]);
+            // Check if page is loading for the first time
+            if (!IsPostBack)
+            {
+                // If member, relevant info
+                if (HttpContext.Current.Session["userType"].ToString().Trim() == "Member")
+                {
+                    ShowData(Convert.ToInt32(HttpContext.Current.Session["userID"]));
 
+                    var member = (from m in dbcon.Members
+                                  where m.Member_UserID == Convert.ToInt32(HttpContext.Current.Session["userID"])
+                                  select new
+                                  {
+                                      FullName = m.MemberFirstName + " " + m.MemberLastName
+                                  }).First();
+
+                    lblFullName.Text = "(" + member.FullName + ")";
+                }
+                // Must be admin
+                else
+                {
+                    // Check if the page is loaded for the first time
+                    if (!IsPostBack)
+                    {
+                        // Get all members and instructors. Concat first and last names for dropdowns
+                        var members = from x in dbcon.Members
+                                      select new
+                                      {
+                                          x.Member_UserID,
+                                          Fullname = x.MemberFirstName + " " + x.MemberLastName
+                                      };
+
+                        // Prime dropdowns
+                        ddlMembers.DataTextField = "FullName";
+                        ddlMembers.DataValueField = "Member_UserID";
+
+                        // Add data to both dropdowns
+                        ddlMembers.DataSource = members;
+                        ddlMembers.DataBind();
+
+                        // Show label and dropdown
+                        Label1.Visible = true;
+                        ddlMembers.Visible = true;
+
+                        // Show data for first member
+                        ShowData(Convert.ToInt32(ddlMembers.SelectedValue));
+                    }
+                }
+            }
+        }
+
+        protected void ddlInstructors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Update gridview for selected member
+            ShowData(Convert.ToInt32(ddlMembers.SelectedValue));
+        }
+
+        private void ShowData(int ID)
+        {
             var results = from sect in dbcon.Sections
                           join inst in dbcon.Instructors on sect.Instructor_ID equals inst.InstructorID
-                          where sect.Member_ID == loggedInMemberId
+                          where sect.Member_ID == ID
                           select new { sect.SectionName, inst.InstructorFirstName, inst.InstructorLastName, sect.SectionFee, sect.SectionStartDate };
 
             memberGridView.DataSource = results;
             memberGridView.DataBind();
-
-            var member = (from m in dbcon.Members
-                             where m.Member_UserID == loggedInMemberId
-                             select new
-                             {
-                                 FullName = m.MemberFirstName + " " + m.MemberLastName
-                             }).First();
-
-            lblFullName.Text = "(" + member.FullName + ")";
         }
     }
 }
