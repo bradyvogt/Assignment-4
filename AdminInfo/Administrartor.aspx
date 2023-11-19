@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <table style="width:100%">
     <tr>
-        <td style="background-color: #FF8080">
+        <td style="background-color: #FFFFCC">
             <table  class="w-100">
                 <tr>
                     <td style="width: 50%" ><center><span style="font-size: x-large"><strong>Members</strong></span><br />
@@ -10,7 +10,7 @@
                 </tr>
                 <tr>
                     <td style="width: 50%" >
-                        <asp:GridView ID="dgvMembers" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateSelectButton="True"  DataKeyNames="MemberFirstName,MemberLastName,MemberPhoneNumber,MemberDateJoined" Width="90%">
+                        <asp:GridView ID="dgvMembers" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateSelectButton="True"  DataKeyNames="Member_UserID,MemberFirstName,MemberLastName,MemberPhoneNumber,MemberDateJoined" Width="90%" OnRowDataBound="dgvMembers_RowDataBound" OnSelectedIndexChanged="dgvMembers_SelectedIndexChanged">
                             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                             <EditRowStyle BackColor="#999999" />
                             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -88,7 +88,7 @@
                                 </td>
                                 <td align="right" style="height: 15%; width: 15%;" >Date Joined:&nbsp; </td>
                                 <td style="height: 15%; width: 30%">
-                                    <asp:TextBox ID="txtAddMemberDateJoined" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtAddMemberDateJoined" runat="server" TextMode="Date"></asp:TextBox>
                                     <br />
                                 </td>
                                 <td style="height: 15%; width: 62px;">
@@ -156,13 +156,57 @@
                                     &nbsp;</td>
                             </tr>
                             <tr>
+                                <td align="right" style="width: 15%" >&nbsp;</td>
+                                <td style="width: 30%">
+                                    &nbsp;</td>
+                                <td align="right" style="width: 15%" >Username:&nbsp; </td>
+                                <td style="width: 30%">
+                                    <asp:TextBox ID="txtAddMemberUsername" runat="server"></asp:TextBox>
+                                </td>
+                                <td style="width: 62px">
+                                    &nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td align="right" style="width: 15%" >&nbsp;</td>
+                                <td style="width: 30%">
+                                    &nbsp;</td>
+                                <td align="right" style="width: 15%" >&nbsp;</td>
+                                <td style="width: 30%">
+                                    <asp:RequiredFieldValidator ID="rfvMemberFName0" runat="server" ControlToValidate="txtAddMemberUsername" ErrorMessage="Please enter a username." ForeColor="Red" ValidationGroup="valMember" Display="Dynamic"></asp:RequiredFieldValidator>
+                                </td>
+                                <td style="width: 62px">
+                                    &nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td align="right" style="width: 15%" >&nbsp;</td>
+                                <td style="width: 30%">
+                                    &nbsp;</td>
+                                <td align="right" style="width: 15%" >Password:&nbsp; </td>
+                                <td style="width: 30%">
+                                    <asp:TextBox ID="txtAddMemberPassword" runat="server" TextMode="Password"></asp:TextBox>
+                                </td>
+                                <td style="width: 62px">
+                                    &nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td align="right" style="width: 15%" >&nbsp;</td>
+                                <td style="width: 30%">
+                                    &nbsp;</td>
+                                <td align="right" style="width: 15%" >&nbsp;</td>
+                                <td style="width: 30%">
+                                    <asp:RequiredFieldValidator ID="rfvMemberPassword" runat="server" ControlToValidate="txtAddMemberPassword" ErrorMessage="Please enter a password." ForeColor="Red" ValidationGroup="valMember" Display="Dynamic"></asp:RequiredFieldValidator>
+                                </td>
+                                <td style="width: 62px">
+                                    &nbsp;</td>
+                            </tr>
+                            <tr>
                                 <td style="width: 15%"  >&nbsp;</td>
                                 <td style="width: 30%">
-                        <asp:Button ID="btnDeleteMember" runat="server" Text="Delete" />
+                        <asp:Button ID="btnDeleteMember" runat="server" Text="Delete" OnClick="btnDeleteMember_Click" />
                                 </td>
                                 <td style="width: 15%"  >&nbsp;</td>
                                 <td style="width: 30%">
-                        <asp:Button ID="btnAddMember" runat="server" Text="Add" ValidationGroup="valMember" />
+                        <asp:Button ID="btnAddMember" runat="server" Text="Add" ValidationGroup="valMember" OnClick="btnAddMember_Click" />
                                 </td>
                                 <td style="width: 62px">
                                     &nbsp;</td>
@@ -176,7 +220,7 @@
                 </tr>
             </table>
         </td>
-        <td style="background-color: #FF8080">
+        <td style="background-color: #FFFFCC">
             <table  class="w-100">
                 <tr>
                     <td style="width: 50%" ><center><span style="font-size: x-large"><strong>Instructors</strong></span><br />
@@ -184,7 +228,7 @@
                 </tr>
                 <tr>
                     <td style="width: 50%"  >
-                        <asp:GridView ID="dgvInstructors" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateSelectButton="True" Width="100%" DataKeyNames="InstructorFirstName,InstructorLastName">
+                        <asp:GridView ID="dgvInstructors" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateSelectButton="True" Width="100%" DataKeyNames="InstructorID,InstructorFirstName,InstructorLastName" OnRowDataBound="dgvInstructors_RowDataBound" OnSelectedIndexChanged="dgvInstructors_SelectedIndexChanged">
                             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                             <EditRowStyle BackColor="#999999" />
                             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -280,13 +324,49 @@
         </td>
     </tr>
     <tr>
+        <td align="right" style="width: 18%" >&nbsp;</td>
+        <td class="w-25" style="width: 27%">
+            &nbsp;</td>
+                                <td align="right" style="width: 15%" >Username:&nbsp; </td>
+                                <td style="width: 30%">
+                                    <asp:TextBox ID="txtAddInstructorUsername" runat="server"></asp:TextBox>
+                                </td>
+    </tr>
+    <tr>
+        <td align="right" style="width: 18%" >&nbsp;</td>
+        <td class="w-25" style="width: 27%">
+            &nbsp;</td>
+                                <td align="right" style="width: 15%" >&nbsp;</td>
+                                <td style="width: 30%">
+                                    <asp:RequiredFieldValidator ID="rfvInstructorFName" runat="server" ControlToValidate="txtAddInstructorUsername" ErrorMessage="Please enter a username." ForeColor="Red" ValidationGroup="valInstructor" Display="Dynamic"></asp:RequiredFieldValidator>
+                                </td>
+    </tr>
+    <tr>
+        <td align="right" style="width: 18%" >&nbsp;</td>
+        <td class="w-25" style="width: 27%">
+            &nbsp;</td>
+                                <td align="right" style="width: 15%" >Password:&nbsp; </td>
+                                <td style="width: 30%">
+                                    <asp:TextBox ID="txtAddInstructorPassword" runat="server" TextMode="Password"></asp:TextBox>
+                                </td>
+    </tr>
+    <tr>
+        <td align="right" style="width: 18%" >&nbsp;</td>
+        <td class="w-25" style="width: 27%">
+            &nbsp;</td>
+                                <td align="right" style="width: 15%" >&nbsp;</td>
+                                <td style="width: 30%">
+                                    <asp:RequiredFieldValidator ID="rfvInstructorPassword" runat="server" ControlToValidate="txtAddInstructorPassword" ErrorMessage="Please enter a password." ForeColor="Red" ValidationGroup="valInstructor" Display="Dynamic"></asp:RequiredFieldValidator>
+                                </td>
+    </tr>
+    <tr>
         <td style="width: 18%"  >&nbsp;</td>
         <td class="w-25" style="width: 27%">
-<asp:Button ID="Button1" runat="server" Text="Delete" />
+<asp:Button ID="btnDeleteInstructor" runat="server" Text="Delete" OnClick="btnDeleteInstructor_Click" />
         </td>
         <td style="width: 18%"  >&nbsp;</td>
         <td style="width: 27%">
-<asp:Button ID="Button2" runat="server" Text="Add" ValidationGroup="valInstructor" />
+<asp:Button ID="btnAddInstructor" runat="server" Text="Add" ValidationGroup="valInstructor" OnClick="btnAddInstructor_Click" />
         </td>
         <td style="width: 62px">
             &nbsp;</td>
@@ -302,33 +382,49 @@
         </td>
     </tr>
     <tr>
-        <td style="background-color: #FF8080; " colspan="2">
+        <td style="background-color: #FFFFCC; " colspan="2">
             <table >
                 <tr>
-                    <td align="right" >ModelName: </td>
+                    <td align="right" >Section Name: </td>
                     <td>
-                        <asp:TextBox ID="txtAddModel" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right" >AutoTypeID: </td>
-                    <td>
-                        <asp:DropDownList ID="ddlAddTypeID" runat="server">
+                        <asp:DropDownList ID="ddlSection" runat="server" AutoPostBack="True">
                             <asp:ListItem>Karate Age-Uke</asp:ListItem>
                             <asp:ListItem>Karate Chudan-Uke</asp:ListItem>
                         </asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" >CargoSpace: </td>
+                    <td align="right" style="height: 30px" >Member: </td>
+                    <td style="height: 30px">
+                        <asp:DropDownList ID="ddlMembers" runat="server" AutoPostBack="True">
+                        </asp:DropDownList>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" >Instructor: </td>
                     <td>
-                        <asp:TextBox ID="txtAddCargoSpace" runat="server"></asp:TextBox>
+                        <asp:DropDownList ID="ddlInstructors" runat="server" AutoPostBack="True">
+                        </asp:DropDownList>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" >Start Date: </td>
+                    <td>
+                        <asp:TextBox ID="txtSectionDate" runat="server" TextMode="Date"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="rfvStartDate" runat="server" ControlToValidate="txtSectionDate" Display="Dynamic" ErrorMessage="Please enter a date." ForeColor="Red" ValidationGroup="valAssign"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" >Fee: </td>
+                    <td>
+                        <asp:TextBox ID="txtFee" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="rfvFee" runat="server" ControlToValidate="txtFee" Display="Dynamic" ErrorMessage="Please enter a fee." ForeColor="Red" ValidationGroup="valAssign"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
                     <td align="right" >&nbsp;</td>
                     <td>
-            <asp:Button ID="btnAdd" runat="server" Text="Add" />
+            <asp:Button ID="btnAssign" runat="server" Text="Assign" OnClick="btnAssign_Click" ValidationGroup="valAssign" />
                     </td>
                 </tr>
                 </table>
