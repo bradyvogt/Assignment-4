@@ -29,7 +29,7 @@ body {
 }
 
 .header {
-    background-image: url("image.jpg");
+    background-image: url("/image.jpg");
     background-size: cover;
     background-position: center;
     position: relative;

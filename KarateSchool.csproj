@@ -68,6 +68,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminInfo\Administrartor.aspx" />
     <Content Include="App_Data\KarateSchool.mdf" />
     <Content Include="App_Data\KarateSchool_log.ldf">
       <DependentUpon>KarateSchool.mdf</DependentUpon>
@@ -82,6 +83,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminInfo\Administrartor.aspx.cs">
+      <DependentUpon>Administrartor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminInfo\Administrartor.aspx.designer.cs">
+      <DependentUpon>Administrartor.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -123,6 +131,7 @@
   <ItemGroup>
     <Content Include="InstructorInfo\Web.config" />
     <Content Include="MemberInfo\Web.config" />
+    <Content Include="AdminInfo\Web.config" />
     <None Include="packages.config" />
     <Content Include="Site1.Master" />
     <Content Include="School.dbml">

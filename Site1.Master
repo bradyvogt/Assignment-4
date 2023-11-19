@@ -4,8 +4,8 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <link rel="stylesheet" type="text/css" href="main.css"/>
-    <script type="text/javascript" src="main.js"></script>
+    <link rel="stylesheet" type="text/css" href="/main.css"/>
+    <script type="text/javascript" src="/main.js"></script>
     <meta charset="utf-8" />
     <title></title>
     <!-- Latest compiled and minified CSS -->
@@ -49,9 +49,10 @@
         </div>
     </header>
         <form id="form1" runat="server">
+            <div class="background container-fluid">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-
                 </asp:ContentPlaceHolder>
+            </div>
         </form>
     <footer class="page-footer">
         <div class="container">
@@ -68,6 +69,7 @@
                     <p>
                         <br />Travis.Kunkel@ndsu.edu
                         <br />Brady.Vogt@ndsu.edu
+                    </p>
                 </div>
             </div>
         </div>
