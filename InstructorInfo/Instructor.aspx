@@ -8,7 +8,7 @@
         <asp:LoginStatus ID="LoginStatus1" runat="server" />
     </p>
     <p>
-        <asp:Label ID="Label1" runat="server" Text="Select a Instructor to preview: "></asp:Label>
+        <asp:Label ID="Label1" runat="server" Text="Select a Instructor to preview: " Visible="False"></asp:Label>
         <asp:DropDownList ID="ddlInstructors" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlInstructors_SelectedIndexChanged" Visible="False">
         </asp:DropDownList>
     </p>
